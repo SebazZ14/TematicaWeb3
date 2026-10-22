@@ -5,5 +5,6 @@
  */
 export const environment = {
   production: true,
-  apiUrl: 'https://educonnect-backend-web3.onrender.com/api'
+  apiUrl: 'https://educonnect-backend-mrcr.onrender.com/api'
 };
+
