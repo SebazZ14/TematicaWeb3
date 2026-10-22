@@ -167,25 +167,34 @@
                       <input
                         type="text"
                         class="form-control form-control-lg rounded-pill"
+                        [class.is-invalid]="!!errorValidacion()"
                         placeholder="Ingresa tu nombre completo..."
+                        maxlength="60"
                         [(ngModel)]="nombreParticipante"
+                        (input)="validarNombre()"
                       >
                     </div>
                     <div class="col-sm-4">
                       <button
                         type="button"
                         class="btn btn-primary btn-lg w-100 rounded-pill fw-bold"
-                        [disabled]="guardandoResultado()"
+                        [disabled]="guardandoResultado() || !nombreParticipante.trim() || !!errorValidacion()"
                         (click)="guardarResultadoEnBD()"
                       >
                         @if (guardandoResultado()) {
                           <span class="spinner-border spinner-border-sm me-1"></span>Guardando...
                         } @else {
-                          <i class="bi bi-check-lg me-1"></i>Guardar en BD
+                          <i class="bi bi-shield-check me-1"></i>Guardar en BD
                         }
                       </button>
                     </div>
                   </div>
+                  @if (errorValidacion()) {
+                    <div class="text-danger small mt-2 d-flex align-items-center gap-1">
+                      <i class="bi bi-exclamation-octagon-fill"></i>
+                      <span>{{ errorValidacion() }}</span>
+                    </div>
+                  }
                 </div>
               } @else {
                 <div class="alert alert-success d-flex align-items-center justify-content-center gap-2 rounded-4 py-3 mb-4" role="alert">

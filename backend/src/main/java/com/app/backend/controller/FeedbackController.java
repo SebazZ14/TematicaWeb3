@@ -30,7 +30,7 @@ public class FeedbackController {
     }
 
     @PostMapping
-    public ResponseEntity<FeedbackDTO> guardarFeedback(@RequestBody CrearFeedbackDTO dto) {
+    public ResponseEntity<FeedbackDTO> guardarFeedback(@jakarta.validation.Valid @RequestBody CrearFeedbackDTO dto) {
         FeedbackDTO creado = service.guardarFeedback(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }

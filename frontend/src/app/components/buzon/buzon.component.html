@@ -33,10 +33,19 @@
               <input
                 type="text"
                 class="form-control rounded-3"
+                [class.is-invalid]="!!errorNombre()"
                 placeholder="Ej. Juan Pérez o Déjalo en blanco"
                 name="nuevoNombre"
+                maxlength="60"
                 [(ngModel)]="nuevoNombre"
+                (input)="validarNombre()"
               >
+              @if (errorNombre()) {
+                <div class="text-danger small mt-1 d-flex align-items-center gap-1">
+                  <i class="bi bi-exclamation-circle-fill"></i>
+                  <span>{{ errorNombre() }}</span>
+                </div>
+              }
             </div>
 
             <div class="mb-3">
@@ -52,23 +61,37 @@
               <label class="form-label small fw-semibold text-muted">Contenido del Mensaje:</label>
               <textarea
                 class="form-control rounded-3"
+                [class.is-invalid]="!!errorMensaje()"
                 rows="4"
-                placeholder="Escribe tu observación o práctica de feedback asertivo..."
+                placeholder="Escribe tu observación o práctica de feedback asertivo (sin scripts ni HTML)..."
                 name="nuevoContenido"
+                maxlength="500"
                 [(ngModel)]="nuevoContenido"
+                (input)="validarMensaje()"
                 required
               ></textarea>
+              <div class="d-flex justify-content-between align-items-center mt-1">
+                @if (errorMensaje()) {
+                  <div class="text-danger small d-flex align-items-center gap-1">
+                    <i class="bi bi-shield-exclamation"></i>
+                    <span>{{ errorMensaje() }}</span>
+                  </div>
+                } @else {
+                  <span class="text-muted small" style="font-size: 0.75rem;">Sanitización activa contra XSS y SQLi</span>
+                }
+                <small class="text-muted ms-auto" style="font-size: 0.75rem;">{{ nuevoContenido.length }}/500</small>
+              </div>
             </div>
 
             <button
               type="submit"
               class="btn btn-primary w-100 rounded-pill py-2 fw-semibold"
-              [disabled]="enviando()"
+              [disabled]="enviando() || !!errorNombre() || !!errorMensaje() || !nuevoContenido.trim()"
             >
               @if (enviando()) {
                 <span class="spinner-border spinner-border-sm me-1"></span>Enviando...
               } @else {
-                <i class="bi bi-send-fill me-1"></i>Publicar Mensaje
+                <i class="bi bi-shield-lock-fill me-1"></i>Publicar Mensaje Seguro
               }
             </button>
           </form>

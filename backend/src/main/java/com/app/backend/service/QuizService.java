@@ -29,12 +29,13 @@ public class QuizService {
     }
 
     public ResultadoQuizDTO guardarResultado(GuardarResultadoDTO dto) {
-        String nombre = (dto.nombreParticipante() == null || dto.nombreParticipante().isBlank())
+        String sanitizedNombre = com.app.backend.util.InputSanitizer.sanitizeNombre(dto.nombreParticipante());
+        String nombre = (sanitizedNombre == null || sanitizedNombre.isBlank())
                 ? "Participante Anónimo"
-                : dto.nombreParticipante().trim();
+                : sanitizedNombre;
 
-        int puntaje = dto.puntaje() != null ? dto.puntaje() : 0;
         int total = (dto.totalPreguntas() != null && dto.totalPreguntas() > 0) ? dto.totalPreguntas() : 6;
+        int puntaje = dto.puntaje() != null ? Math.max(0, Math.min(dto.puntaje(), total)) : 0;
 
         String nivel = calcularNivel(puntaje, total);
 

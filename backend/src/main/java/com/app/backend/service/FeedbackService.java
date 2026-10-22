@@ -24,9 +24,11 @@ public class FeedbackService {
     }
 
     public FeedbackDTO guardarFeedback(CrearFeedbackDTO dto) {
-        String nombre = (dto.nombre() == null || dto.nombre().isBlank()) ? "Anónimo" : dto.nombre().trim();
+        String sanitizedNombre = com.app.backend.util.InputSanitizer.sanitizeNombre(dto.nombre());
+        String nombre = (sanitizedNombre == null || sanitizedNombre.isBlank()) ? "Anónimo" : sanitizedNombre;
+
         String tipo = (dto.tipoMensaje() == null || dto.tipoMensaje().isBlank()) ? "Sugerencia" : dto.tipoMensaje().trim();
-        String mensaje = (dto.mensaje() == null) ? "" : dto.mensaje().trim();
+        String mensaje = com.app.backend.util.InputSanitizer.sanitizeTexto(dto.mensaje());
 
         Feedback feedback = new Feedback(
                 null,

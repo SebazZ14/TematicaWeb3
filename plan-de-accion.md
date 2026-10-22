@@ -110,6 +110,35 @@
 
 ---
 
+## FASE DE SEGURIDAD: Sanitización Defensiva y Protección contra XSS / SQLi (✅ COMPLETADO)
+**Objetivo:** Proteger la aplicación de forma integral tanto en frontend como en backend contra inyecciones SQL, ataques XSS (Cross-Site Scripting), alteración de parámetros y caracteres especiales no válidos (como `$$$`).
+
+* [x] **Paso S.1: Backend - Dependencia y Validaciones Jakarta:**
+  * Inclusión de `spring-boot-starter-validation` en `pom.xml`.
+  * Anotaciones en DTOs (`@NotBlank`, `@Size`, `@Pattern`, `@NotNull`, `@Min`, `@Max`).
+  * Whitelist estricta para nombres: `^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s.'\\-]{2,60}$` (rechaza `$$$`, scripts o inyecciones).
+  * Whitelist estricta para mensajes del buzón y control de rango para puntajes de quiz (`0 <= puntaje <= totalPreguntas`).
+* [x] **Paso S.2: Backend - Utilidad de Sanitización Activa (`InputSanitizer`):**
+  * Limpieza y desinfección preventiva de etiquetas HTML (`<[^>]*>`), vectores de scripting (`javascript:`, `onerror=`) y caracteres peligrosos antes de persistir en PostgreSQL.
+* [x] **Paso S.3: Backend - Manejador de Errores Seguro (`GlobalSecurityExceptionHandler`):**
+  * Captura de `MethodArgumentNotValidException`, `BindException` e `IllegalArgumentException`.
+  * Respuesta estándar HTTP 400 Bad Request con detalles claros para el cliente, evitando fugas de stack traces o nombres de tablas de la base de datos.
+* [x] **Paso S.4: Frontend - Validación en Tiempo Real y UX Defensiva:**
+  * En `QuizComponent`: Validación reactiva con mensajes visuales de advertencia inmediata si se ingresan caracteres especiales (`$$$`, `<`, `>`, scripts) y deshabilitación del botón de envío.
+  * En `BuzonComponent`: Validación de nombre y contenido con contador de caracteres (`maxlength="500"`), bloqueo de inyecciones y feedback de estado.
+* [x] **Paso S.5: Suite de Pruebas Automatizadas de Seguridad (`SecuritySanitizationTest`):**
+  * 7 pruebas unitarias e integrales en Spring Boot con MockMvc:
+    * Intento de inyección con caracteres `$$$` rechazado con 400 Bad Request.
+    * Ataque XSS (`<script>`) rechazado con 400 Bad Request.
+    * Ataque SQL Injection (`' OR '1'='1; --`) rechazado con 400 Bad Request.
+    * Puntajes negativos o fuera de rango rechazados con 400 Bad Request.
+    * Nombres legítimos con tildes y diéresis aceptados con 201 Created.
+    * Mensajes de feedback con etiquetas HTML rechazados con 400 Bad Request.
+    * Mensajes legítimos aceptados y persistidos con 201 Created.
+* **✅ COMMIT 8:** `feat(security): plan integral de seguridad con sanitizacion xss, prevencion sqli y tests automatizados`
+
+---
+
 ## FASE 7: Verificación, Documentación y Entrega
 **Objetivo:** Pruebas finales, preparación de la demostración y entrega antes del límite del 22 de Octubre.
 

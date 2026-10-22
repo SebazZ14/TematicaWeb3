@@ -47,9 +47,50 @@ export class BuzonComponent implements OnInit {
     });
   }
 
+  errorNombre = signal<string | null>(null);
+  errorMensaje = signal<string | null>(null);
+
+  validarNombre(): boolean {
+    const nom = this.nuevoNombre.trim();
+    if (nom.length > 0) {
+      if (nom.length < 2 || nom.length > 60) {
+        this.errorNombre.set('El nombre debe tener entre 2 y 60 caracteres.');
+        return false;
+      }
+      const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s.'-]+$/;
+      if (!regex.test(nom)) {
+        this.errorNombre.set('El nombre contiene caracteres especiales no válidos (evita $, <, >, {, }, scripts).');
+        return false;
+      }
+    }
+    this.errorNombre.set(null);
+    return true;
+  }
+
+  validarMensaje(): boolean {
+    const msg = this.nuevoContenido.trim();
+    if (!msg) {
+      this.errorMensaje.set('Por favor, escribe el contenido de tu mensaje.');
+      return false;
+    }
+    if (msg.length < 5 || msg.length > 500) {
+      this.errorMensaje.set('El mensaje debe tener entre 5 y 500 caracteres.');
+      return false;
+    }
+    const regexInyeccion = /[<>{}\[\]\\^`$]/;
+    if (regexInyeccion.test(msg)) {
+      this.errorMensaje.set('Por seguridad, el mensaje no debe contener etiquetas HTML, scripts o caracteres de inyección ($ < > { } [ ] \\ ^ `).');
+      return false;
+    }
+    this.errorMensaje.set(null);
+    return true;
+  }
+
   enviarMensaje(): void {
-    if (!this.nuevoContenido.trim()) {
-      alert('Por favor, escribe el contenido de tu mensaje.');
+    const esNombreValido = this.validarNombre();
+    const esMensajeValido = this.validarMensaje();
+
+    if (!esNombreValido || !esMensajeValido) {
       return;
     }
 
@@ -67,15 +108,21 @@ export class BuzonComponent implements OnInit {
         this.enviando.set(false);
         this.nuevoNombre = '';
         this.nuevoContenido = '';
-        this.mensajeExito.set('¡Tu mensaje fue registrado correctamente en PostgreSQL!');
+        this.errorNombre.set(null);
+        this.errorMensaje.set(null);
+        this.mensajeExito.set('¡Tu mensaje fue sanitizado y registrado correctamente en PostgreSQL!');
         this.cargarMensajes();
 
         setTimeout(() => this.mensajeExito.set(null), 4000);
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error al enviar feedback:', err);
         this.enviando.set(false);
-        alert('Ocurrió un error al enviar el mensaje al servidor.');
+        const backendError = err.error?.detalles?.mensaje
+          || err.error?.detalles?.nombre
+          || err.error?.mensaje
+          || 'Ocurrió un error al enviar el mensaje al servidor.';
+        this.errorMensaje.set(backendError);
       }
     });
   }

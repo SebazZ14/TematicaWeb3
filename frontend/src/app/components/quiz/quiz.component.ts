@@ -23,10 +23,30 @@ export class QuizComponent implements OnInit {
   puntajeCalculado = signal<number>(0);
 
   nombreParticipante = '';
+  errorValidacion = signal<string | null>(null);
   guardandoResultado = signal<boolean>(false);
   resultadoGuardado = signal<ResultadoQuiz | null>(null);
   mejoresPuntajes = signal<ResultadoQuiz[]>([]);
   mostrarExplicaciones = signal<boolean>(false);
+
+  validarNombre(): boolean {
+    const val = this.nombreParticipante.trim();
+    if (!val) {
+      this.errorValidacion.set('Por favor, ingresa tu nombre para registrar tu resultado.');
+      return false;
+    }
+    if (val.length < 2 || val.length > 60) {
+      this.errorValidacion.set('El nombre debe tener entre 2 y 60 caracteres.');
+      return false;
+    }
+    const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s.'-]+$/;
+    if (!regex.test(val)) {
+      this.errorValidacion.set('No se permiten caracteres especiales como $, <, >, {, }, scripts ni inyecciones de código. Solo se permiten letras y espacios.');
+      return false;
+    }
+    this.errorValidacion.set(null);
+    return true;
+  }
 
   toggleExplicaciones(): void {
     this.mostrarExplicaciones.update((v) => !v);
@@ -114,8 +134,7 @@ export class QuizComponent implements OnInit {
   }
 
   guardarResultadoEnBD(): void {
-    if (!this.nombreParticipante.trim()) {
-      alert('Por favor, ingresa tu nombre para registrar tu resultado.');
+    if (!this.validarNombre()) {
       return;
     }
 
@@ -130,12 +149,16 @@ export class QuizComponent implements OnInit {
       next: (resultado) => {
         this.resultadoGuardado.set(resultado);
         this.guardandoResultado.set(false);
+        this.errorValidacion.set(null);
         this.cargarMejoresPuntajes();
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error al guardar resultado:', err);
         this.guardandoResultado.set(false);
-        alert('Ocurrió un error al registrar el resultado en la base de datos.');
+        const backendError = err.error?.detalles?.nombreParticipante
+          || err.error?.mensaje
+          || 'Ocurrió un error al registrar el resultado en la base de datos.';
+        this.errorValidacion.set(backendError);
       }
     });
   }

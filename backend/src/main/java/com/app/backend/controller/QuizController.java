@@ -31,7 +31,7 @@ public class QuizController {
     }
 
     @PostMapping("/resultado")
-    public ResponseEntity<ResultadoQuizDTO> guardarResultado(@RequestBody GuardarResultadoDTO dto) {
+    public ResponseEntity<ResultadoQuizDTO> guardarResultado(@jakarta.validation.Valid @RequestBody GuardarResultadoDTO dto) {
         ResultadoQuizDTO resultado = service.guardarResultado(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
     }
