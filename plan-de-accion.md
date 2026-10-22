@@ -145,9 +145,12 @@
 * [x] **Paso 7.1:** Prueba integral del flujo web completo de punta a punta (Backend 8080 + Frontend 4200 + PostgreSQL).
 * [x] **Paso 7.2:** Verificación en vivo de datos en DBeaver/PostgreSQL (tablas `preguntas_quiz`, `resultados_quiz`, `articulos`, `feedback`).
 * [x] **Paso 7.3:** Verificación de contenedores Docker (`docker ps` - contenedor `postgres_db` activo).
-* [ ] **Paso 7.4:** Preparar el repositorio GitHub público y despliegue para la URL pública exigida por el formulario de entrega.
-* [ ] **Paso 7.5:** Completar el Formulario de Google Forms: https://forms.gle/MoCPR84ACERBAy6H7
-* **✅ COMMIT 8:** `docs: documentacion final, capturas y preparacion de entrega`
+* [x] **Paso 7.4:** Preparar el repositorio GitHub público y arquitectura de despliegue en la nube:
+  * Backend: `Dockerfile` multietapa con JDK/JRE 21 y `application.properties` con variables dinámicas de entorno para Render.com / Neon.tech.
+  * Frontend: `vercel.json` y `_redirects` configurados para evitar errores 404 en el enrutamiento SPA, y soporte de entornos dinámicos (`environment.prod.ts`).
+  * CORS unificado en `CorsConfig.java` para permitir peticiones HTTPS desde `*.vercel.app`.
+* [ ] **Paso 7.5:** Subir cambios a GitHub (`git push`), vincular Render/Neon/Vercel y completar el Formulario de Google Forms: https://forms.gle/MoCPR84ACERBAy6H7
+* **✅ COMMIT 9:** `feat(deploy): configuracion de produccion para vercel, render y neon tech con docker y variables de entorno`
 
 ---
 
