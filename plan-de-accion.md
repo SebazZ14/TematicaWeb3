@@ -39,26 +39,26 @@
 
 ---
 
-## FASE 2: Backend - API REST de Contenido y Recursos
+## FASE 2: Backend - API REST de Contenido y Recursos (✅ COMPLETADO)
 **Objetivo:** Exponer endpoints para alimentar el Inicio y la Sección Informativa.
 
-* [ ] **Paso 2.1:** Crear `ArticuloDTO` (record Java).
-* [ ] **Paso 2.2:** Crear `ArticuloRepository` y `ArticuloService` (listar todos y filtrar por categoría).
-* [ ] **Paso 2.3:** Crear `ArticuloController` con endpoint `GET /api/articulos` y `GET /api/articulos/{id}` con `@CrossOrigin(origins = "http://localhost:4200")`.
-* [ ] **Paso 2.4:** Verificar endpoints con navegador o cliente HTTP.
+* [x] **Paso 2.1:** Crear `ArticuloDTO` (record Java).
+* [x] **Paso 2.2:** Crear `ArticuloRepository` y `ArticuloService` (listar todos y filtrar por categoría).
+* [x] **Paso 2.3:** Crear `ArticuloController` con endpoint `GET /api/articulos` y `GET /api/articulos/{id}` con `@CrossOrigin(origins = "http://localhost:4200")`.
+* [x] **Paso 2.4:** Verificar endpoints con navegador o cliente HTTP.
 * **✅ COMMIT 3:** `feat(backend): api rest de articulos y contenido educativo`
 
 ---
 
-## FASE 3: Backend - API REST de Quiz y Buzón de Feedback
+## FASE 3: Backend - API REST de Quiz y Buzón de Feedback (✅ COMPLETADO)
 **Objetivo:** Exponer endpoints para el quiz interactivo, guardado de resultados y buzón.
 
-* [ ] **Paso 3.1:** Crear DTOs: `PreguntaQuizDTO`, `ResultadoQuizDTO`, `GuardarResultadoDTO`, `FeedbackDTO`.
-* [ ] **Paso 3.2:** Crear `QuizService` y `QuizController`:
+* [x] **Paso 3.1:** Crear DTOs: `PreguntaQuizDTO`, `ResultadoQuizDTO`, `GuardarResultadoDTO`, `FeedbackDTO`, `CrearFeedbackDTO`.
+* [x] **Paso 3.2:** Crear `QuizService` y `QuizController`:
   * `GET /api/quiz/preguntas` (obtiene el listado de preguntas desde PostgreSQL).
   * `POST /api/quiz/resultado` (guarda el resultado del usuario en `ResultadoQuiz` y retorna diagnóstico).
-  * `GET /api/quiz/mejores-puntajes` (top 5 participantes destacados).
-* [ ] **Paso 3.3:** Crear `FeedbackService` y `FeedbackController`:
+  * `GET /api/quiz/mejores-puntajes` (top 10 participantes destacados).
+* [x] **Paso 3.3:** Crear `FeedbackService` y `FeedbackController`:
   * `GET /api/feedback` (listar mensajes constructivos).
   * `POST /api/feedback` (enviar nuevo mensaje o sugerencia).
 * **✅ COMMIT 4:** `feat(backend): api rest de quiz, registro de resultados y buzon`
