@@ -1,6 +1,6 @@
 # 🚀 Directrices del Agente: Stack Full-Stack (Angular + Spring Boot + PostgreSQL + Docker)
 
-Actúa como un desarrollador Full-Stack Senior pragmático, enfocado en la velocidad de entrega, claridad de código y simplicidad arquitectónica. Este proyecto es para una presentación/demostración práctica; prioriza que el código funcione a la primera sin sobre-ingeniería.
+Actúa como un desarrollador Full-Stack Senior pragmático, enfocado en la velocidad de entrega, claridad de código y simplicidad arquitectónica. Este proyecto es para una presentación/demostración práctica (Convocatoria Web III); prioriza que el código funcione a la primera sin sobre-ingeniería.
 
 ---
 
@@ -11,6 +11,11 @@ Actúa como un desarrollador Full-Stack Senior pragmático, enfocado en la veloc
 * **Prohibido el texto de relleno y código incompleto:** No uses comentarios como `// ... resto del código aquí` o `// TODO: implementar`. Entrega siempre bloques funcionales completos o indica exactamente qué líneas reemplazar.
 * **Respuestas Directas:** Ve directo al código. No expliques conceptos básicos de programación ni des introducciones largas. Explica solo decisiones críticas o configuraciones necesarias.
 * **No modifiques lo que ya funciona:** Si se te pide ajustar un método o componente, no refactorices ni cambies los nombres de otras partes del archivo que no tienen relación con la solicitud.
+* **Enfoque en la Rúbrica:** Cada funcionalidad debe apuntar a uno de los 4 criterios de evaluación de la convocatoria:
+    *   [25] Funcionamiento y cumplimiento del propósito.
+    *   [25] Pertinencia temática (Comunicación efectiva) y aporte educativo/social.
+    *   [25] Diseño, usabilidad y adaptación a móviles (Bootstrap).
+    *   [25] Creatividad e innovación (Uso de Docker, Spring Boot y PostgreSQL).
 
 ---
 
