@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, RouterLink } from '@angular/router';
 import { FeedbackService, Feedback, CrearFeedback } from '../../services/feedback.service';
 
 @Component({
   selector: 'app-buzon',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule, RouterLink],
   templateUrl: './buzon.component.html'
 })
 export class BuzonComponent implements OnInit {

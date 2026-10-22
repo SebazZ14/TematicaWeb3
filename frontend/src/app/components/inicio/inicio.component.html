@@ -1,4 +1,4 @@
-<section id="inicio" class="hero-gradient text-white py-5 position-relative overflow-hidden">
+<section class="hero-gradient text-white py-5 position-relative overflow-hidden">
   <div class="container py-lg-5">
     <div class="row align-items-center g-5">
       <div class="col-lg-7">
@@ -12,10 +12,10 @@
           En el desarrollo de software y la vida profesional, el código resuelve problemas técnicos, pero la comunicación asertiva une a las personas. Descubre herramientas prácticas para escuchar con atención, expresar ideas con claridad y resolver desacuerdos con respeto.
         </p>
         <div class="d-flex flex-wrap gap-3">
-          <a href="#quiz" class="btn btn-warning btn-lg fw-bold px-4 rounded-pill shadow">
+          <a routerLink="/quiz" class="btn btn-warning btn-lg fw-bold px-4 rounded-pill shadow">
             <i class="bi bi-play-circle-fill me-2"></i>Realizar Test Asertivo
           </a>
-          <a href="#articulos" class="btn btn-outline-light btn-lg fw-medium px-4 rounded-pill">
+          <a routerLink="/guias" class="btn btn-outline-light btn-lg fw-medium px-4 rounded-pill">
             <i class="bi bi-book-half me-2"></i>Explorar Guías
           </a>
         </div>
@@ -29,7 +29,7 @@
               </div>
               <div>
                 <h5 class="fw-bold mb-0">Objetivo del Proyecto</h5>
-                <small class="text-muted">EduConnect - Plataforma Formativa</small>
+                <small class="text-muted">EduConnect — Plataforma Formativa</small>
               </div>
             </div>
             <p class="text-muted mb-3 small">
@@ -121,6 +121,79 @@
               Negociar soluciones 'ganar-ganar' mediante el Método DEPO cuando se presentan desacuerdos o presiones de entrega.
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Módulos de la Plataforma (Acceso Directo con routerLink) -->
+<section class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="row text-center mb-5">
+      <div class="col-lg-8 mx-auto">
+        <span class="badge bg-primary bg-opacity-10 text-primary fw-bold text-uppercase px-3 py-2 rounded-pill small">
+          Módulos Interactivos
+        </span>
+        <h2 class="display-6 fw-bold mt-2">Explora Cada Sección de la Aplicación</h2>
+        <p class="text-muted">
+          Navega entre las diferentes áreas diseñadas para fortalecer tus habilidades comunicativas.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Módulo Guías -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 bg-white card-hover d-flex flex-column justify-content-between">
+          <div>
+            <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-3 d-inline-block mb-3 fs-3">
+              <i class="bi bi-journal-richtext"></i>
+            </div>
+            <h4 class="fw-bold mb-2">Guías Educativas</h4>
+            <p class="text-muted small mb-4">
+              Artículos y recomendaciones sobre los 3 estilos de comunicación, escucha activa, lenguaje corporal y resolución de conflictos.
+            </p>
+          </div>
+          <a routerLink="/guias" class="btn btn-outline-primary rounded-pill fw-semibold">
+            Ver Artículos <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo Quiz -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 bg-white card-hover d-flex flex-column justify-content-between">
+          <div>
+            <div class="p-3 bg-warning bg-opacity-10 text-warning rounded-3 d-inline-block mb-3 fs-3">
+              <i class="bi bi-patch-question-fill"></i>
+            </div>
+            <h4 class="fw-bold mb-2">Test Asertivo</h4>
+            <p class="text-muted small mb-4">
+              Quiz interactivo con preguntas situacionales traídas desde PostgreSQL. Calcula tu puntaje y registra tu diagnóstico en vivo.
+            </p>
+          </div>
+          <a routerLink="/quiz" class="btn btn-warning rounded-pill fw-bold text-dark">
+            Comenzar Quiz <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo Buzón -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm rounded-4 p-4 bg-white card-hover d-flex flex-column justify-content-between">
+          <div>
+            <div class="p-3 bg-success bg-opacity-10 text-success rounded-3 d-inline-block mb-3 fs-3">
+              <i class="bi bi-chat-heart-fill"></i>
+            </div>
+            <h4 class="fw-bold mb-2">Buzón de Práctica</h4>
+            <p class="text-muted small mb-4">
+              Espacio para enviar sugerencias constructivas, agradecimientos o experiencias de comunicación en equipo persistidas en la BD.
+            </p>
+          </div>
+          <a routerLink="/buzon" class="btn btn-outline-success rounded-pill fw-semibold">
+            Ir al Buzón <i class="bi bi-arrow-right ms-1"></i>
+          </a>
         </div>
       </div>
     </div>

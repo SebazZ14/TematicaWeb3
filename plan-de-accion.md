@@ -68,13 +68,13 @@
 ## FASE 4: Frontend - Navegación y Sección A (Inicio y Presentación) (✅ COMPLETADO)
 **Objetivo:** Desarrollar el layout general, navegación y la primera sección obligatoria de la convocatoria.
 
-* [x] **Paso 4.1:** Crear `NavbarComponent` responsivo con enlaces ancla/rutas (`Inicio`, `Aprende`, `Test Asertivo`, `Buzón`, `Equipo`).
-* [x] **Paso 4.2:** Diseñar `HomeComponent` / `InicioComponent` (Sección A de la Convocatoria):
+* [x] **Paso 4.1:** Arquitectura multipágina SPA con enrutador Angular (`/inicio`, `/guias`, `/quiz`, `/buzon`, `/desarrolladores`) y `NavbarComponent` responsivo con menú hamburguesa interactivo (auto-cierre al seleccionar opción o hacer clic fuera) y estado `routerLinkActive`.
+* [x] **Paso 4.2:** Diseñar `InicioComponent` (Sección A de la Convocatoria):
   * **Hero Banner:** Introducción de impacto al valor de la comunicación efectiva en el ámbito académico y laboral.
   * **Objetivos del Sitio:** Pilares clave (Asertividad, Escucha, Empatía, Resolución de Conflictos).
-  * **Accesos Rápidos (CTA):** Botones directos a "¿Qué tan asertivo eres? (Quiz)" y "Explorar Guías".
-  * **Estadísticas / Métricas:** Tarjetas visuales con indicadores clave.
-* **✅ COMMIT 5:** `feat(frontend): navbar responsivo y seccion de inicio y presentacion`
+  * **Accesos Rápidos (CTA):** Botones y tarjetas directas con `routerLink` a "¿Qué tan asertivo eres? (Quiz)" y "Explorar Guías".
+  * **Módulos Interactivos:** Tarjetas de navegación rápida a cada sección.
+* **✅ COMMIT 5:** `feat(frontend): arquitectura multipagina spa con angular router y navbar interactivo`
 
 ---
 

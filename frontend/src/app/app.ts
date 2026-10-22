@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { InicioComponent } from './components/inicio/inicio.component';
-import { ArticulosComponent } from './components/articulos/articulos.component';
-import { QuizComponent } from './components/quiz/quiz.component';
-import { BuzonComponent } from './components/buzon/buzon.component';
-import { DesarrolladoresComponent } from './components/desarrolladores/desarrolladores.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
@@ -13,12 +9,8 @@ import { FooterComponent } from './components/footer/footer.component';
   standalone: true,
   imports: [
     CommonModule,
+    RouterOutlet,
     NavbarComponent,
-    InicioComponent,
-    ArticulosComponent,
-    QuizComponent,
-    BuzonComponent,
-    DesarrolladoresComponent,
     FooterComponent
   ],
   templateUrl: './app.html',

@@ -203,11 +203,17 @@
               <div class="accordion mb-4 text-start" id="accordionExplicaciones">
                 <div class="accordion-item border-0 bg-light rounded-4 overflow-hidden mb-2">
                   <h2 class="accordion-header">
-                    <button class="accordion-button bg-light fw-bold text-dark collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalle">
+                    <button
+                      class="accordion-button bg-light fw-bold text-dark"
+                      [class.collapsed]="!mostrarExplicaciones()"
+                      type="button"
+                      [attr.aria-expanded]="mostrarExplicaciones()"
+                      (click)="toggleExplicaciones()"
+                    >
                       <i class="bi bi-card-checklist me-2 text-primary"></i>Revisar Retroalimentación Pregunta por Pregunta
                     </button>
                   </h2>
-                  <div id="collapseDetalle" class="accordion-collapse collapse" data-bs-parent="#accordionExplicaciones">
+                  <div id="collapseDetalle" class="accordion-collapse collapse" [class.show]="mostrarExplicaciones()">
                     <div class="accordion-body bg-white">
                       @for (preg of preguntas(); track preg.id) {
                         <div class="py-3 border-bottom">
@@ -231,10 +237,16 @@
                 </div>
               </div>
 
-              <div>
+              <div class="d-flex flex-wrap justify-content-center gap-2">
                 <button type="button" class="btn btn-outline-primary rounded-pill px-4" (click)="reiniciarQuiz()">
                   <i class="bi bi-arrow-repeat me-1"></i>Reintentar el Quiz
                 </button>
+                <a routerLink="/guias" class="btn btn-outline-secondary rounded-pill px-4">
+                  <i class="bi bi-journal-text me-1"></i>Repasar Guías
+                </a>
+                <a routerLink="/buzon" class="btn btn-outline-success rounded-pill px-4">
+                  <i class="bi bi-chat-heart me-1"></i>Dejar Feedback
+                </a>
               </div>
             </div>
           }

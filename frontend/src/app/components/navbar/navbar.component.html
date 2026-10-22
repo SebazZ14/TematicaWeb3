@@ -1,51 +1,97 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm py-2">
   <div class="container">
-    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="#inicio">
+    <a
+      class="navbar-brand fw-bold d-flex align-items-center gap-2"
+      routerLink="/inicio"
+      (click)="cerrarMenu()"
+    >
       <i class="bi bi-chat-quote-fill fs-4 text-warning"></i>
-      <span>EduConnect</span>
-      <span class="badge bg-white text-primary fs-7 rounded-pill ms-1">Web III</span>
+      <span class="fs-5">EduConnect</span>
+      <span class="badge bg-white text-primary fs-7 rounded-pill ms-1 d-none d-sm-inline-block">Web III</span>
     </a>
+
+    <!-- Botón Hamburguesa Responsive -->
     <button
-      class="navbar-toggler"
+      class="navbar-toggler border-0 shadow-none p-2"
       type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarContent"
-      aria-controls="navbarContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
+      [attr.aria-expanded]="menuAbierto()"
+      aria-label="Abrir o cerrar menú de navegación"
+      (click)="toggleMenu()"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1">
+
+    <!-- Contenido del Menú Desplegable -->
+    <div
+      class="collapse navbar-collapse"
+      id="navbarContent"
+      [class.show]="menuAbierto()"
+    >
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1 pt-3 pt-lg-0">
         <li class="nav-item">
-          <a class="nav-link text-white fw-medium" href="#inicio">
-            <i class="bi bi-house-door me-1"></i>Inicio
+          <a
+            class="nav-link text-white fw-medium px-3 py-2 rounded-3 d-flex align-items-center gap-2"
+            routerLink="/inicio"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="cerrarMenu()"
+          >
+            <i class="bi bi-house-door"></i>
+            <span>Inicio</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fw-medium" href="#articulos">
-            <i class="bi bi-journal-text me-1"></i>Guías
+          <a
+            class="nav-link text-white fw-medium px-3 py-2 rounded-3 d-flex align-items-center gap-2"
+            routerLink="/guias"
+            routerLinkActive="active"
+            (click)="cerrarMenu()"
+          >
+            <i class="bi bi-journal-text"></i>
+            <span>Guías Educativas</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fw-medium" href="#quiz">
-            <i class="bi bi-patch-question me-1"></i>Test Asertivo
+          <a
+            class="nav-link text-white fw-medium px-3 py-2 rounded-3 d-flex align-items-center gap-2"
+            routerLink="/quiz"
+            routerLinkActive="active"
+            (click)="cerrarMenu()"
+          >
+            <i class="bi bi-patch-question"></i>
+            <span>Test Asertivo</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fw-medium" href="#buzon">
-            <i class="bi bi-chat-heart me-1"></i>Buzón
+          <a
+            class="nav-link text-white fw-medium px-3 py-2 rounded-3 d-flex align-items-center gap-2"
+            routerLink="/buzon"
+            routerLinkActive="active"
+            (click)="cerrarMenu()"
+          >
+            <i class="bi bi-chat-heart"></i>
+            <span>Buzón</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white fw-medium" href="#desarrolladores">
-            <i class="bi bi-people-fill me-1"></i>Equipo
+          <a
+            class="nav-link text-white fw-medium px-3 py-2 rounded-3 d-flex align-items-center gap-2"
+            routerLink="/desarrolladores"
+            routerLinkActive="active"
+            (click)="cerrarMenu()"
+          >
+            <i class="bi bi-people-fill"></i>
+            <span>Equipo</span>
           </a>
         </li>
-        <li class="nav-item ms-lg-2">
-          <a class="btn btn-warning btn-sm text-dark fw-bold rounded-pill px-3 shadow-sm" href="#quiz">
-            <i class="bi bi-play-circle-fill me-1"></i>Iniciar Quiz
+        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+          <a
+            class="btn btn-warning btn-sm text-dark fw-bold rounded-pill px-3 py-2 shadow-sm d-inline-flex align-items-center gap-1 w-100 w-lg-auto justify-content-center"
+            routerLink="/quiz"
+            (click)="cerrarMenu()"
+          >
+            <i class="bi bi-play-circle-fill"></i>
+            <span>Hacer Quiz</span>
           </a>
         </li>
       </ul>

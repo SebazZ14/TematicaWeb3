@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, RouterLink } from '@angular/router';
 import { QuizService, PreguntaQuiz, ResultadoQuiz } from '../../services/quiz.service';
 
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule, RouterLink],
   templateUrl: './quiz.component.html'
 })
 export class QuizComponent implements OnInit {
@@ -25,6 +26,11 @@ export class QuizComponent implements OnInit {
   guardandoResultado = signal<boolean>(false);
   resultadoGuardado = signal<ResultadoQuiz | null>(null);
   mejoresPuntajes = signal<ResultadoQuiz[]>([]);
+  mostrarExplicaciones = signal<boolean>(false);
+
+  toggleExplicaciones(): void {
+    this.mostrarExplicaciones.update((v) => !v);
+  }
 
   ngOnInit(): void {
     this.cargarPreguntas();

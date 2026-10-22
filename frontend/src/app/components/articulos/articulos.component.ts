@@ -1,11 +1,12 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, RouterLink } from '@angular/router';
 import { ArticuloService, Articulo } from '../../services/articulo.service';
 
 @Component({
   selector: 'app-articulos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule, RouterLink],
   templateUrl: './articulos.component.html'
 })
 export class ArticulosComponent implements OnInit {
