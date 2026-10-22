@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface PreguntaQuiz {
   id: number;
@@ -34,7 +35,7 @@ export interface ResultadoQuiz {
 })
 export class QuizService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/quiz';
+  private apiUrl = `${environment.apiUrl}/quiz`;
 
   getPreguntas(): Observable<PreguntaQuiz[]> {
     return this.http.get<PreguntaQuiz[]>(`${this.apiUrl}/preguntas`);

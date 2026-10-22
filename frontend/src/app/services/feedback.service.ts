@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Feedback {
   id: number;
@@ -21,7 +22,7 @@ export interface CrearFeedback {
 })
 export class FeedbackService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:8080/api/feedback';
+  private apiUrl = `${environment.apiUrl}/feedback`;
 
   getFeedback(): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(this.apiUrl);
