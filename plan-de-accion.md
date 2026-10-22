@@ -113,10 +113,10 @@
 ## FASE 7: Verificación, Documentación y Entrega
 **Objetivo:** Pruebas finales, preparación de la demostración y entrega antes del límite del 22 de Octubre.
 
-* [ ] **Paso 7.1:** Prueba integral del flujo web completo de punta a punta.
-* [ ] **Paso 7.2:** Verificación en vivo de datos en DBeaver (mostrar tablas `preguntas_quiz`, `resultados_quiz`, `articulos`, `feedback`).
-* [ ] **Paso 7.3:** Verificación de contenedores Docker (`docker ps`).
-* [ ] **Paso 7.4:** Preparar el repositorio GitHub público y opciones de despliegue rápido (Vercel/Render) para la URL pública exigida por el formulario de entrega.
+* [x] **Paso 7.1:** Prueba integral del flujo web completo de punta a punta (Backend 8080 + Frontend 4200 + PostgreSQL).
+* [x] **Paso 7.2:** Verificación en vivo de datos en DBeaver/PostgreSQL (tablas `preguntas_quiz`, `resultados_quiz`, `articulos`, `feedback`).
+* [x] **Paso 7.3:** Verificación de contenedores Docker (`docker ps` - contenedor `postgres_db` activo).
+* [ ] **Paso 7.4:** Preparar el repositorio GitHub público y despliegue para la URL pública exigida por el formulario de entrega.
 * [ ] **Paso 7.5:** Completar el Formulario de Google Forms: https://forms.gle/MoCPR84ACERBAy6H7
 * **✅ COMMIT 8:** `docs: documentacion final, capturas y preparacion de entrega`
 
