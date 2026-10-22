@@ -65,11 +65,11 @@
 
 ---
 
-## FASE 4: Frontend - Navegación y Sección A (Inicio y Presentación)
+## FASE 4: Frontend - Navegación y Sección A (Inicio y Presentación) (✅ COMPLETADO)
 **Objetivo:** Desarrollar el layout general, navegación y la primera sección obligatoria de la convocatoria.
 
-* [ ] **Paso 4.1:** Crear `NavbarComponent` responsivo con enlaces ancla/rutas (`Inicio`, `Aprende`, `Test Asertivo`, `Buzón`, `Equipo`).
-* [ ] **Paso 4.2:** Diseñar `HomeComponent` (Sección A de la Convocatoria):
+* [x] **Paso 4.1:** Crear `NavbarComponent` responsivo con enlaces ancla/rutas (`Inicio`, `Aprende`, `Test Asertivo`, `Buzón`, `Equipo`).
+* [x] **Paso 4.2:** Diseñar `HomeComponent` / `InicioComponent` (Sección A de la Convocatoria):
   * **Hero Banner:** Introducción de impacto al valor de la comunicación efectiva en el ámbito académico y laboral.
   * **Objetivos del Sitio:** Pilares clave (Asertividad, Escucha, Empatía, Resolución de Conflictos).
   * **Accesos Rápidos (CTA):** Botones directos a "¿Qué tan asertivo eres? (Quiz)" y "Explorar Guías".
@@ -78,33 +78,34 @@
 
 ---
 
-## FASE 5: Frontend - Sección B (Informativa) y Sección C (Quiz Interactivo)
+## FASE 5: Frontend - Sección B (Informativa) y Sección C (Quiz Interactivo) (✅ COMPLETADO)
 **Objetivo:** Completar el núcleo temático y la interacción obligatoria con base de datos.
 
-* [ ] **Paso 5.1:** Crear `ArticuloService` en Angular y componente `SeccionInformativaComponent` (Sección B):
-  * Tarjetas con categorías temáticas (Asertividad, Escucha Activa, Lenguaje No Verbal, Comunicación No Violenta).
-  * Modal o acordeón interactivo para lectura detallada y tips prácticos aplicables.
-* [ ] **Paso 5.2:** Crear `QuizService` en Angular y componente `QuizComponent` (Sección C):
+* [x] **Paso 5.1:** Crear `ArticuloService` en Angular y componente `ArticulosComponent` (Sección B):
+  * Tarjetas con categorías temáticas (Asertividad, Escucha Activa, Lenguaje No Verbal, Resolución de Conflictos).
+  * Modal interactivo para lectura detallada y tips prácticos aplicables.
+* [x] **Paso 5.2:** Crear `QuizService` en Angular y componente `QuizComponent` (Sección C):
   * Carga dinámica de preguntas desde `GET /api/quiz/preguntas`.
-  * Barra de progreso de preguntas y selector de opciones.
-  * Formulario al finalizar para ingresar nombre y registrar resultado (`POST /api/quiz/resultado`).
-  * Pantalla de resultados con puntaje obtenido, badge de nivel ("Comunicador Asertivo", "En Desarrollo", etc.) y retroalimentación personalizada.
+  * Barra de progreso de preguntas y selector de opciones A, B, C, D.
+  * Formulario para ingresar nombre y registrar resultado (`POST /api/quiz/resultado`).
+  * Pantalla de resultados con puntaje obtenido, badge de nivel diagnóstico y retroalimentación pregunta por pregunta.
+  * Tabla de ranking/historial en vivo de PostgreSQL.
 * **✅ COMMIT 6:** `feat(frontend): seccion informativa interactiva y modulo completo de quiz con postgresql`
 
 ---
 
-## FASE 6: Frontend - Sección D (Desarrolladores) y Buzón de Feedback
+## FASE 6: Frontend - Sección D (Desarrolladores) y Buzón de Feedback (✅ COMPLETADO)
 **Objetivo:** Cumplir con la sección obligatoria de desarrolladores y añadir el valor innovador.
 
-* [ ] **Paso 6.1:** Crear `DesarrolladoresComponent` (Sección D de la Convocatoria):
-  * Presentación del equipo (nombres, roles, carrera: Sistemas Informáticos - Inst. Técnico Nac. de Comercio "Federico Álvarez Plata").
+* [x] **Paso 6.1:** Crear `DesarrolladoresComponent` (Sección D de la Convocatoria):
+  * Presentación del equipo (Sebastian Timoteo Huarachi Garcia y Dennis Abimael Vera Ustariz - Carrera: Sistemas Informáticos - Inst. Técnico Nac. de Comercio "Federico Álvarez Plata").
   * Propósito del proyecto y problemática abordada.
   * Stack tecnológico interactivo con insignias y logos (Angular 22, Spring Boot, PostgreSQL, Docker, Bootstrap).
   * Resumen de funcionalidades implementadas y créditos.
-* [ ] **Paso 6.2:** Crear `FeedbackComponent` (Buzón de práctica de comunicación constructiva):
-  * Formulario con selector de tono de mensaje (Agradecimiento, Sugerencia constructiva, Duda).
-  * Muro visual de mensajes recibidos en tiempo real.
-* [ ] **Paso 6.3:** Revisión de diseño responsivo en móviles y modo visual pulido.
+* [x] **Paso 6.2:** Crear `BuzonComponent` (Buzón de práctica de comunicación constructiva):
+  * Formulario con selector de tipo de mensaje (Agradecimiento, Sugerencia constructiva, Duda).
+  * Muro visual de mensajes recibidos en tiempo real desde PostgreSQL.
+* [x] **Paso 6.3:** Revisión de diseño responsivo en móviles y modo visual pulido con Bootstrap 5.
 * **✅ COMMIT 7:** `feat(frontend): seccion oficial de desarrolladores y buzon de feedback`
 
 ---

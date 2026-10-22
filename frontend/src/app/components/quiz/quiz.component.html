@@ -1,0 +1,288 @@
+<section id="quiz" class="py-5 bg-white border-top border-bottom">
+  <div class="container py-4">
+    <div class="row text-center mb-4">
+      <div class="col-lg-8 mx-auto">
+        <span class="badge bg-warning text-dark fw-bold text-uppercase px-3 py-2 rounded-pill small">
+          Sección C: Quiz Interactivo
+        </span>
+        <h2 class="display-6 fw-bold mt-2">Test: ¿Qué Tan Asertiva es tu Comunicación?</h2>
+        <p class="text-muted">
+          Preguntas recuperadas directamente desde la base de datos PostgreSQL. Responde cada caso situacional y descubre tu nivel de comunicación.
+        </p>
+      </div>
+    </div>
+
+    @if (cargando()) {
+      <div class="text-center py-5">
+        <div class="spinner-border text-warning" role="status">
+          <span class="visually-hidden">Cargando quiz...</span>
+        </div>
+        <p class="text-muted mt-2">Consultando preguntas desde PostgreSQL...</p>
+      </div>
+    } @else if (error()) {
+      <div class="alert alert-danger text-center shadow-sm max-w-md mx-auto" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error() }}
+        <div class="mt-2">
+          <button class="btn btn-outline-danger btn-sm" (click)="cargarPreguntas()">Reintentar</button>
+        </div>
+      </div>
+    } @else {
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          
+          <!-- ESTADO 1: RESPONDIENDO EL QUIZ -->
+          @if (!quizFinalizado() && preguntaActual) {
+            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-light mb-4">
+              <!-- Barra de Progreso -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="badge bg-primary text-white rounded-pill px-3 py-1">
+                  Pregunta {{ indiceActual() + 1 }} de {{ totalPreguntas }}
+                </span>
+                <span class="badge bg-secondary bg-opacity-25 text-dark rounded-pill px-3 py-1">
+                  Dimensión: {{ preguntaActual.dimension }}
+                </span>
+              </div>
+              <div class="progress mb-4" style="height: 8px;">
+                <div
+                  class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+                  role="progressbar"
+                  [style.width.%]="((indiceActual() + 1) / totalPreguntas) * 100"
+                ></div>
+              </div>
+
+              <!-- Enunciado -->
+              <h4 class="fw-bold mb-4 text-dark lh-base">
+                {{ preguntaActual.enunciado }}
+              </h4>
+
+              <!-- Opciones A, B, C, D -->
+              <div class="d-grid gap-3 mb-4">
+                <!-- Opción A -->
+                <button
+                  type="button"
+                  class="btn text-start p-3 rounded-3 border d-flex align-items-center gap-3 transition-all"
+                  [class.btn-primary]="opcionSeleccionadaActual === 1"
+                  [class.btn-white]="opcionSeleccionadaActual !== 1"
+                  [class.bg-white]="opcionSeleccionadaActual !== 1"
+                  (click)="seleccionarOpcion(1)"
+                >
+                  <span class="badge rounded-circle p-2 fs-6" [class.bg-white]="opcionSeleccionadaActual === 1" [class.text-primary]="opcionSeleccionadaActual === 1" [class.bg-primary]="opcionSeleccionadaActual !== 1" [class.text-white]="opcionSeleccionadaActual !== 1">A</span>
+                  <span class="lh-sm">{{ preguntaActual.opcionA }}</span>
+                </button>
+
+                <!-- Opción B -->
+                <button
+                  type="button"
+                  class="btn text-start p-3 rounded-3 border d-flex align-items-center gap-3 transition-all"
+                  [class.btn-primary]="opcionSeleccionadaActual === 2"
+                  [class.btn-white]="opcionSeleccionadaActual !== 2"
+                  [class.bg-white]="opcionSeleccionadaActual !== 2"
+                  (click)="seleccionarOpcion(2)"
+                >
+                  <span class="badge rounded-circle p-2 fs-6" [class.bg-white]="opcionSeleccionadaActual === 2" [class.text-primary]="opcionSeleccionadaActual === 2" [class.bg-primary]="opcionSeleccionadaActual !== 2" [class.text-white]="opcionSeleccionadaActual !== 2">B</span>
+                  <span class="lh-sm">{{ preguntaActual.opcionB }}</span>
+                </button>
+
+                <!-- Opción C -->
+                <button
+                  type="button"
+                  class="btn text-start p-3 rounded-3 border d-flex align-items-center gap-3 transition-all"
+                  [class.btn-primary]="opcionSeleccionadaActual === 3"
+                  [class.btn-white]="opcionSeleccionadaActual !== 3"
+                  [class.bg-white]="opcionSeleccionadaActual !== 3"
+                  (click)="seleccionarOpcion(3)"
+                >
+                  <span class="badge rounded-circle p-2 fs-6" [class.bg-white]="opcionSeleccionadaActual === 3" [class.text-primary]="opcionSeleccionadaActual === 3" [class.bg-primary]="opcionSeleccionadaActual !== 3" [class.text-white]="opcionSeleccionadaActual !== 3">C</span>
+                  <span class="lh-sm">{{ preguntaActual.opcionC }}</span>
+                </button>
+
+                <!-- Opción D -->
+                <button
+                  type="button"
+                  class="btn text-start p-3 rounded-3 border d-flex align-items-center gap-3 transition-all"
+                  [class.btn-primary]="opcionSeleccionadaActual === 4"
+                  [class.btn-white]="opcionSeleccionadaActual !== 4"
+                  [class.bg-white]="opcionSeleccionadaActual !== 4"
+                  (click)="seleccionarOpcion(4)"
+                >
+                  <span class="badge rounded-circle p-2 fs-6" [class.bg-white]="opcionSeleccionadaActual === 4" [class.text-primary]="opcionSeleccionadaActual === 4" [class.bg-primary]="opcionSeleccionadaActual !== 4" [class.text-white]="opcionSeleccionadaActual !== 4">D</span>
+                  <span class="lh-sm">{{ preguntaActual.opcionD }}</span>
+                </button>
+              </div>
+
+              <!-- Navegación entre preguntas -->
+              <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary rounded-pill px-4"
+                  [disabled]="indiceActual() === 0"
+                  (click)="anteriorPregunta()"
+                >
+                  <i class="bi bi-arrow-left me-1"></i>Anterior
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-warning fw-bold rounded-pill px-4 text-dark"
+                  [disabled]="!opcionSeleccionadaActual"
+                  (click)="siguientePregunta()"
+                >
+                  {{ indiceActual() === totalPreguntas - 1 ? 'Finalizar Quiz' : 'Siguiente' }}
+                  <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          }
+
+          <!-- ESTADO 2: PANTALLA DE RESULTADOS Y REGISTRO EN BD -->
+          @if (quizFinalizado()) {
+            <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 bg-white text-center mb-4">
+              <div class="mb-3">
+                <div class="d-inline-flex p-4 rounded-circle bg-warning bg-opacity-10 text-warning fs-1 mb-2">
+                  <i class="bi bi-trophy-fill"></i>
+                </div>
+                <h3 class="fw-bold">¡Quiz Completado!</h3>
+                <p class="text-muted">Aquí tienes el cálculo de tu puntuación y diagnóstico comunicativo.</p>
+              </div>
+
+              <div class="py-3 px-4 bg-light rounded-4 mb-4">
+                <h1 class="display-3 fw-bold text-primary mb-0">
+                  {{ puntajeCalculado() }} <span class="fs-4 text-muted">/ {{ totalPreguntas }}</span>
+                </h1>
+                <p class="fw-semibold mt-2 mb-0">
+                  Respuestas correctas y asertivas seleccionadas
+                </p>
+              </div>
+
+              <!-- Formulario de Registro en PostgreSQL -->
+              @if (!resultadoGuardado()) {
+                <div class="card border-primary border-opacity-25 bg-primary bg-opacity-10 rounded-4 p-4 mb-4 text-start">
+                  <h5 class="fw-bold text-primary mb-2">
+                    <i class="bi bi-database-add me-1"></i>Registrar tu Resultado en PostgreSQL
+                  </h5>
+                  <p class="text-muted small mb-3">
+                    Cumple con el criterio de evaluación de la convocatoria guardando tu intento en la tabla <code>resultados_quiz</code>.
+                  </p>
+                  <div class="row g-2">
+                    <div class="col-sm-8">
+                      <input
+                        type="text"
+                        class="form-control form-control-lg rounded-pill"
+                        placeholder="Ingresa tu nombre completo..."
+                        [(ngModel)]="nombreParticipante"
+                      >
+                    </div>
+                    <div class="col-sm-4">
+                      <button
+                        type="button"
+                        class="btn btn-primary btn-lg w-100 rounded-pill fw-bold"
+                        [disabled]="guardandoResultado()"
+                        (click)="guardarResultadoEnBD()"
+                      >
+                        @if (guardandoResultado()) {
+                          <span class="spinner-border spinner-border-sm me-1"></span>Guardando...
+                        } @else {
+                          <i class="bi bi-check-lg me-1"></i>Guardar en BD
+                        }
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              } @else {
+                <div class="alert alert-success d-flex align-items-center justify-content-center gap-2 rounded-4 py-3 mb-4" role="alert">
+                  <i class="bi bi-check-circle-fill fs-4 text-success"></i>
+                  <div>
+                    <strong>¡Registro guardado con éxito!</strong>
+                    <div class="small">
+                      Participante: <strong>{{ resultadoGuardado()?.nombreParticipante }}</strong> — Nivel: <span class="badge bg-success">{{ resultadoGuardado()?.nivelComunicacion }}</span>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              <!-- Explicación Formativa de las Preguntas -->
+              <div class="accordion mb-4 text-start" id="accordionExplicaciones">
+                <div class="accordion-item border-0 bg-light rounded-4 overflow-hidden mb-2">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button bg-light fw-bold text-dark collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetalle">
+                      <i class="bi bi-card-checklist me-2 text-primary"></i>Revisar Retroalimentación Pregunta por Pregunta
+                    </button>
+                  </h2>
+                  <div id="collapseDetalle" class="accordion-collapse collapse" data-bs-parent="#accordionExplicaciones">
+                    <div class="accordion-body bg-white">
+                      @for (preg of preguntas(); track preg.id) {
+                        <div class="py-3 border-bottom">
+                          <h6 class="fw-bold mb-1">{{ preg.enunciado }}</h6>
+                          <div class="small mb-1">
+                            Tu respuesta: 
+                            <span class="badge" [class.bg-success]="respuestasSeleccionadas()[preg.id] === preg.respuestaCorrecta" [class.bg-danger]="respuestasSeleccionadas()[preg.id] !== preg.respuestaCorrecta">
+                              Opción {{ respuestasSeleccionadas()[preg.id] === 1 ? 'A' : respuestasSeleccionadas()[preg.id] === 2 ? 'B' : respuestasSeleccionadas()[preg.id] === 3 ? 'C' : 'D' }}
+                            </span>
+                            <span class="ms-2 text-muted">
+                              (Correcta: Opción {{ preg.respuestaCorrecta === 1 ? 'A' : preg.respuestaCorrecta === 2 ? 'B' : preg.respuestaCorrecta === 3 ? 'C' : 'D' }})
+                            </span>
+                          </div>
+                          <p class="text-secondary small mb-0 bg-light p-2 rounded-2">
+                            <i class="bi bi-info-circle text-primary me-1"></i>{{ preg.explicacion }}
+                          </p>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button type="button" class="btn btn-outline-primary rounded-pill px-4" (click)="reiniciarQuiz()">
+                  <i class="bi bi-arrow-repeat me-1"></i>Reintentar el Quiz
+                </button>
+              </div>
+            </div>
+          }
+
+          <!-- Ranking en Vivo desde PostgreSQL -->
+          <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mt-4">
+            <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+              <h5 class="fw-bold mb-0 text-dark">
+                <i class="bi bi-bar-chart-fill text-warning me-2"></i>Historial de Intentos Registrados en PostgreSQL
+              </h5>
+              <button class="btn btn-outline-secondary btn-sm rounded-pill" (click)="cargarMejoresPuntajes()">
+                <i class="bi bi-arrow-clockwise"></i> Refrescar
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0 small">
+                <thead class="table-light">
+                  <tr>
+                    <th>#</th>
+                    <th>Participante</th>
+                    <th>Puntaje</th>
+                    <th>Nivel Diagnóstico</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (res of mejoresPuntajes(); track res.id; let idx = $index) {
+                    <tr>
+                      <td class="fw-bold text-muted">{{ idx + 1 }}</td>
+                      <td class="fw-semibold text-dark">{{ res.nombreParticipante }}</td>
+                      <td>
+                        <span class="badge bg-primary rounded-pill">{{ res.puntaje }}/{{ res.totalPreguntas }}</span>
+                      </td>
+                      <td>
+                        <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25">
+                          {{ res.nivelComunicacion }}
+                        </span>
+                      </td>
+                      <td class="text-muted">{{ res.fecha | date:'short' }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    }
+  </div>
+</section>

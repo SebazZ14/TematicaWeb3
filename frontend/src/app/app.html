@@ -1,38 +1,22 @@
-﻿<div class="container py-5">
-  <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
-      <div class="card shadow-sm border-0">
-        <div class="card-header bg-primary text-white text-center py-3">
-          <h4 class="mb-0 fw-bold">Full-Stack Demo</h4>
-          <small>Angular + Spring Boot + PostgreSQL en Docker</small>
-        </div>
-        <div class="card-body p-4 text-center">
-          @if (cargando()) {
-            <div class="spinner-border text-primary my-3" role="status">
-              <span class="visually-hidden">Cargando...</span>
-            </div>
-            <p class="text-muted">Consultando backend...</p>
-          } @else if (error()) {
-            <div class="alert alert-danger" role="alert">
-              <strong>Error:</strong> {{ error() }}
-            </div>
-            <button class="btn btn-outline-danger btn-sm mt-2" (click)="cargarSaludo()">
-              Reintentar
-            </button>
-          } @else if (mensaje()) {
-            <div class="alert alert-success d-flex align-items-center justify-content-center gap-2" role="alert">
-              <span class="badge bg-success">ID: {{ mensaje()?.id }}</span>
-              <span class="fw-semibold">{{ mensaje()?.texto }}</span>
-            </div>
-            <p class="text-muted small mb-3">
-              Dato obtenido desde la base de datos PostgreSQL a travÃ©s de la API REST de Spring Boot.
-            </p>
-            <button class="btn btn-primary" (click)="cargarSaludo()">
-              Refrescar Mensaje
-            </button>
-          }
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Navbar Principal Responsivo -->
+<app-navbar></app-navbar>
+
+<main>
+  <!-- Sección A: Inicio y Presentación -->
+  <app-inicio></app-inicio>
+
+  <!-- Sección B: Sección Informativa (Artículos y Recomendaciones de PostgreSQL) -->
+  <app-articulos></app-articulos>
+
+  <!-- Sección C: Quiz Interactivo (Recuperación y Registro en PostgreSQL) -->
+  <app-quiz></app-quiz>
+
+  <!-- Módulo Innovador: Buzón de Comunicación y Práctica Asertiva -->
+  <app-buzon></app-buzon>
+
+  <!-- Sección D: Desarrolladores y Ficha Técnica Oficial -->
+  <app-desarrolladores></app-desarrolladores>
+</main>
+
+<!-- Pie de Página Institucional -->
+<app-footer></app-footer>

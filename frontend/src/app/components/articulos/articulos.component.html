@@ -1,0 +1,111 @@
+<section id="articulos" class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="row text-center mb-4">
+      <div class="col-lg-8 mx-auto">
+        <span class="badge bg-primary bg-opacity-10 text-primary fw-bold text-uppercase px-3 py-2 rounded-pill small">
+          Sección B: Contenido Educativo
+        </span>
+        <h2 class="display-6 fw-bold mt-2">Guías y Recomendaciones Prácticas</h2>
+        <p class="text-muted">
+          Artículos organizados por temáticas para fortalecer tus habilidades de diálogo y empatía.
+        </p>
+
+        <!-- Filtros por Categoría -->
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+          @for (cat of categorias; track cat) {
+            <button
+              class="btn btn-sm rounded-pill px-3 transition-all"
+              [class.btn-primary]="categoriaSeleccionada() === cat"
+              [class.btn-outline-secondary]="categoriaSeleccionada() !== cat"
+              (click)="filtrarPorCategoria(cat)"
+            >
+              {{ cat }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Estado de Carga / Error -->
+    @if (cargando()) {
+      <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando guías...</span>
+        </div>
+        <p class="text-muted mt-2">Recuperando contenido desde PostgreSQL...</p>
+      </div>
+    } @else if (error()) {
+      <div class="alert alert-danger text-center shadow-sm max-w-md mx-auto" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error() }}
+        <div class="mt-2">
+          <button class="btn btn-outline-danger btn-sm" (click)="cargarArticulos()">Reintentar</button>
+        </div>
+      </div>
+    } @else {
+      <!-- Grilla de Tarjetas -->
+      <div class="row g-4">
+        @for (art of articulosFiltrados; track art.id) {
+          <div class="col-md-6 col-lg-6">
+            <div class="card h-100 border-0 shadow-sm rounded-4 p-4 card-hover bg-white d-flex flex-column justify-content-between">
+              <div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-semibold small">
+                    <i class="bi me-1" [ngClass]="art.icono || 'bi-bookmark-star'"></i>
+                    {{ art.categoria }}
+                  </span>
+                  <small class="text-muted">
+                    <i class="bi bi-clock me-1"></i>{{ art.tiempoLectura }} min lectura
+                  </small>
+                </div>
+                <h4 class="fw-bold mb-2 text-dark">{{ art.titulo }}</h4>
+                <p class="text-muted small mb-4 lh-base">{{ art.resumen }}</p>
+              </div>
+              <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+                <small class="text-muted">
+                  <i class="bi bi-person-fill text-secondary me-1"></i>{{ art.autor }}
+                </small>
+                <button class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-semibold" (click)="abrirDetalle(art)">
+                  Leer Guía <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Modal / Vista Detallada de Artículo -->
+  @if (articuloSeleccionado()) {
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.65);" (click)="cerrarDetalle()">
+      <div class="modal-dialog modal-dialog-centered modal-lg" (click)="$event.stopPropagation()">
+        <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+          <div class="modal-header bg-primary text-white p-4">
+            <div>
+              <span class="badge bg-white text-primary rounded-pill mb-2 px-3 py-1 fw-bold">
+                {{ articuloSeleccionado()?.categoria }}
+              </span>
+              <h4 class="modal-title fw-bold">{{ articuloSeleccionado()?.titulo }}</h4>
+            </div>
+            <button type="button" class="btn-close btn-close-white" aria-label="Cerrar" (click)="cerrarDetalle()"></button>
+          </div>
+          <div class="modal-body p-4 bg-white" style="max-height: 65vh; overflow-y: auto;">
+            <div class="d-flex align-items-center gap-3 text-muted small mb-4 pb-2 border-bottom">
+              <span><i class="bi bi-clock me-1"></i>Tiempo estimado: {{ articuloSeleccionado()?.tiempoLectura }} minutos</span>
+              <span><i class="bi bi-person-circle me-1"></i>Autoría: {{ articuloSeleccionado()?.autor }}</span>
+            </div>
+            <div class="lh-lg text-secondary" style="white-space: pre-line;">
+              {{ articuloSeleccionado()?.contenido }}
+            </div>
+          </div>
+          <div class="modal-footer bg-light p-3">
+            <button type="button" class="btn btn-secondary rounded-pill px-4" (click)="cerrarDetalle()">Cerrar</button>
+            <a href="#quiz" class="btn btn-warning fw-bold rounded-pill px-4 text-dark" (click)="cerrarDetalle()">
+              <i class="bi bi-patch-check-fill me-1"></i>Ponlo a Prueba en el Quiz
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</section>
