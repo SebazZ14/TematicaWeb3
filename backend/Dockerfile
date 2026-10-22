@@ -12,6 +12,9 @@ WORKDIR /build
 COPY pom.xml mvnw ./
 COPY .mvn .mvn
 
+# Asegurar permisos de ejecución y formato Unix en mvnw
+RUN chmod +x ./mvnw && sed -i 's/\r$//' ./mvnw
+
 # Descargar dependencias en modo offline para acelerar builds posteriores
 RUN ./mvnw dependency:go-offline -B
 
