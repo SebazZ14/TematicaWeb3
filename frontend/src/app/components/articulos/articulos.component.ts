@@ -47,57 +47,57 @@ export class ArticulosComponent implements OnInit {
   // Catálogo oficial de Recursos y Material de Consulta (Convocatoria Sección B)
   recursosConsulta: RecursoConsulta[] = [
     {
-      titulo: 'Habilidades para la Vida: Comunicación Asertiva y Empatía',
-      tipo: 'Guía Oficial / Documento Técnico',
-      badgeClass: 'bg-danger bg-opacity-10 text-danger',
-      fuente: 'Organización Panamericana de la Salud (OPS/OMS)',
-      descripcion: 'Marco normativo y conceptual sobre el desarrollo de habilidades socioemocionales para el diálogo respetuoso y la prevención de conflictos.',
-      url: 'https://www.paho.org/es/temas/desarrollo-saludable-adolescentes-jovenes',
-      icono: 'bi-file-earmark-pdf-fill text-danger'
+      titulo: 'Teoría y Práctica de la Comunicación Asertiva',
+      tipo: 'Marco Teórico / Enciclopedia',
+      badgeClass: 'bg-primary bg-opacity-10 text-primary',
+      fuente: 'Enciclopedia Académica de Psicología y Comunicación',
+      descripcion: 'Estudio sobre los estilos de conducta (pasivo, agresivo y asertivo), derechos asertivos y técnicas de autoafirmación respetuosa.',
+      url: 'https://es.wikipedia.org/wiki/Asertividad',
+      icono: 'bi-book-half text-primary'
     },
     {
       titulo: 'Metodología de la Comunicación No Violenta (CNV)',
-      tipo: 'Manual de Convivencia',
-      badgeClass: 'bg-primary bg-opacity-10 text-primary',
-      fuente: 'Center for Nonviolent Communication (CNVC)',
-      descripcion: 'Guía práctica para estructurar observaciones, expresar sentimientos y formular peticiones sin agresividad (Base del Método DEPO).',
-      url: 'https://www.cnvc.org',
-      icono: 'bi-chat-quote-fill text-primary'
-    },
-    {
-      titulo: 'How to Improve Your Active Listening Skills',
-      tipo: 'Artículo Académico',
+      tipo: 'Manual de Convivencia y Diálogo',
       badgeClass: 'bg-success bg-opacity-10 text-success',
-      fuente: 'Harvard Professional Development',
-      descripcion: 'Investigaciones de Harvard sobre cómo silenciar el juicio interno, validar al interlocutor y generar confianza en equipos colaborativos.',
-      url: 'https://professional.dce.harvard.edu/blog/how-to-improve-your-active-listening-skills/',
-      icono: 'bi-mortarboard-fill text-success'
+      fuente: 'Center for Nonviolent Communication (CNVC Oficial)',
+      descripcion: 'Enfoque estructurado para transformar conflictos mediante el mensaje en primera persona y la empatía (Base del Método DEPO).',
+      url: 'https://www.cnvc.org/',
+      icono: 'bi-chat-heart-fill text-success'
     },
     {
-      titulo: 'Comunicación y Transparencia en Equipos de Software Ágiles',
-      tipo: 'Framework de Ingeniería',
+      titulo: 'Fundamentos y Técnicas de la Escucha Activa',
+      tipo: 'Artículo Académico de Consulta',
       badgeClass: 'bg-info bg-opacity-10 text-info',
-      fuente: 'Scrum.org / Agile Alliance',
-      descripcion: 'Pautas para revisiones de código asertivas, retrospectivas constructivas y alineación de equipos técnicos de alto desempeño.',
-      url: 'https://www.scrum.org/resources/blog/five-values-scrum-openness-respect-focus-commitment-courage',
-      icono: 'bi-code-square text-info'
+      fuente: 'Compendio de Habilidades Sociales e Interpersonales',
+      descripcion: 'Bases teóricas de la atención plena, validación emocional del interlocutor, paráfrasis clarificadora y erradicación de barreras comunicativas.',
+      url: 'https://es.wikipedia.org/wiki/Escucha_activa',
+      icono: 'bi-ear-fill text-info'
+    },
+    {
+      titulo: 'Comunicación No Verbal: Gestos, Postura y Modulación',
+      tipo: 'Guía de Estudio Semiótico',
+      badgeClass: 'bg-danger bg-opacity-10 text-danger',
+      fuente: 'Estudios de Kinésica y Comunicación Interpersonal',
+      descripcion: 'Análisis de la kinésica, proxémica, microexpresiones faciales y la coherencia corporal indispensable en exposiciones y trabajo colaborativo.',
+      url: 'https://es.wikipedia.org/wiki/Comunicaci%C3%B3n_no_verbal',
+      icono: 'bi-person-check-fill text-danger'
     },
     {
       titulo: 'Cómo hablar de forma que la gente te quiera escuchar',
       tipo: 'Video Conferencia TED',
       badgeClass: 'bg-warning bg-opacity-10 text-dark',
-      fuente: 'Julian Treasure (TED Talks)',
-      descripcion: 'Conferencia audiovisual con más de 50M de reproducciones sobre los 4 pilares del habla efectiva (Honestidad, Autenticidad, Integridad y Afecto).',
-      url: 'https://www.ted.com/talks/julian_treasure_how_to_speak_so_that_people_want_to_listen',
+      fuente: 'Julian Treasure (YouTube / TED Talks)',
+      descripcion: 'Conferencia audiovisual con más de 50M de reproducciones sobre los 4 pilares vocales del habla asertiva (HAIL: Honestidad, Autenticidad, Integridad y Afecto).',
+      url: 'https://www.youtube.com/watch?v=eIho2S0ZahI',
       icono: 'bi-play-circle-fill text-warning'
     },
     {
       titulo: '10 maneras de tener una mejor conversación',
       tipo: 'Video Conferencia TED',
       badgeClass: 'bg-warning bg-opacity-10 text-dark',
-      fuente: 'Celeste Headlee (TED Talks)',
-      descripcion: 'Reglas fundamentales para escuchar con atención, no pontificar, admitir lo que no sabemos y comunicarse sin rodeos.',
-      url: 'https://www.ted.com/talks/celeste_headlee_10_ways_to_have_a_better_conversation',
+      fuente: 'Celeste Headlee (YouTube / TED Talks)',
+      descripcion: 'Reglas fundamentales prácticas para escuchar con atención plena, admitir la incertidumbre con humildad y comunicarse sin divagar.',
+      url: 'https://www.youtube.com/watch?v=R1vskiVDwl4',
       icono: 'bi-youtube text-danger'
     }
   ];
@@ -116,9 +116,9 @@ export class ArticulosComponent implements OnInit {
         ]
       },
       recursoAsociado: {
-        nombre: 'Guía de Asertividad - OPS/OMS',
-        url: 'https://www.paho.org/es/temas/desarrollo-saludable-adolescentes-jovenes',
-        tipo: 'Documento de Consulta'
+        nombre: 'Guía de Asertividad y Derechos Asertivos',
+        url: 'https://es.wikipedia.org/wiki/Asertividad',
+        tipo: 'Material de Consulta'
       }
     },
     'Escucha Activa': {
@@ -133,9 +133,9 @@ export class ArticulosComponent implements OnInit {
         ]
       },
       recursoAsociado: {
-        nombre: 'Harvard Professional Development - Active Listening',
-        url: 'https://professional.dce.harvard.edu/blog/how-to-improve-your-active-listening-skills/',
-        tipo: 'Publicación Académica'
+        nombre: 'Principios y Técnicas de la Escucha Activa',
+        url: 'https://es.wikipedia.org/wiki/Escucha_activa',
+        tipo: 'Material de Consulta'
       }
     },
     'Lenguaje No Verbal': {
@@ -150,9 +150,9 @@ export class ArticulosComponent implements OnInit {
         ]
       },
       recursoAsociado: {
-        nombre: 'Charla TED - Julian Treasure: Sonido y Voz',
-        url: 'https://www.ted.com/talks/julian_treasure_how_to_speak_so_that_people_want_to_listen',
-        tipo: 'Video Educativo'
+        nombre: 'Estudios de Comunicación No Verbal y Kinésica',
+        url: 'https://es.wikipedia.org/wiki/Comunicaci%C3%B3n_no_verbal',
+        tipo: 'Material de Consulta'
       }
     },
     'Resolución de Conflictos': {
@@ -168,9 +168,9 @@ export class ArticulosComponent implements OnInit {
         ]
       },
       recursoAsociado: {
-        nombre: 'Center for Nonviolent Communication (CNVC)',
-        url: 'https://www.cnvc.org',
-        tipo: 'Guía Metodológica'
+        nombre: 'Métodos y Modelos de Resolución de Conflictos',
+        url: 'https://es.wikipedia.org/wiki/Resoluci%C3%B3n_de_conflictos',
+        tipo: 'Material de Consulta'
       }
     }
   };
