@@ -3,11 +3,11 @@
     <div class="row text-center mb-4">
       <div class="col-lg-8 mx-auto">
         <span class="badge bg-primary bg-opacity-10 text-primary fw-bold text-uppercase px-3 py-2 rounded-pill small">
-          Sección B: Contenido Educativo
+          Sección B: Contenido Educativo, Recursos y Material de Consulta
         </span>
-        <h2 class="display-6 fw-bold mt-2">Guías y Recomendaciones Prácticas</h2>
+        <h2 class="display-6 fw-bold mt-2">Guías Prácticas y Recursos Multimedia</h2>
         <p class="text-muted">
-          Artículos organizados por temáticas para fortalecer tus habilidades de diálogo y empatía.
+          Artículos formativos con infografías y fuentes oficiales para fortalecer tus habilidades de diálogo, empatía y trabajo en equipo.
         </p>
 
         <!-- Filtros por Categoría -->
@@ -42,39 +42,104 @@
         </div>
       </div>
     } @else {
-      <!-- Grilla de Tarjetas -->
+      <!-- Grilla de Tarjetas con Portada Multimedia -->
       <div class="row g-4">
         @for (art of articulosFiltrados; track art.id) {
           <div class="col-md-6 col-lg-6">
-            <div class="card h-100 border-0 shadow-sm rounded-4 p-4 card-hover bg-white d-flex flex-column justify-content-between">
-              <div>
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                  <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-semibold small">
+            <div class="card h-100 border-0 shadow-sm rounded-4 card-hover bg-white d-flex flex-column justify-content-between overflow-hidden">
+              
+              <!-- Portada Multimedia -->
+              <div class="position-relative" style="height: 200px; overflow: hidden; background-color: #0f172a;">
+                <img
+                  [src]="getMultimedia(art.categoria).imagenUrl"
+                  [alt]="art.titulo"
+                  class="w-100 h-100 object-fit-cover"
+                  loading="lazy"
+                />
+                <div class="position-absolute top-0 start-0 m-3">
+                  <span class="badge bg-dark bg-opacity-75 text-white px-3 py-2 rounded-pill fw-semibold small shadow-sm">
                     <i class="bi me-1" [ngClass]="art.icono || 'bi-bookmark-star'"></i>
                     {{ art.categoria }}
                   </span>
-                  <small class="text-muted">
-                    <i class="bi bi-clock me-1"></i>{{ art.tiempoLectura }} min lectura
-                  </small>
                 </div>
-                <h4 class="fw-bold mb-2 text-dark">{{ art.titulo }}</h4>
-                <p class="text-muted small mb-4 lh-base">{{ art.resumen }}</p>
+                <div class="position-absolute bottom-0 end-0 m-3">
+                  <span class="badge bg-primary px-3 py-1 rounded-pill small fw-normal shadow">
+                    <i class="bi bi-clock me-1"></i>{{ art.tiempoLectura }} min lectura
+                  </span>
+                </div>
               </div>
-              <div class="d-flex align-items-center justify-content-between pt-3 border-top">
-                <small class="text-muted">
-                  <i class="bi bi-person-fill text-secondary me-1"></i>{{ art.autor }}
-                </small>
-                <button class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-semibold" (click)="abrirDetalle(art)">
-                  Leer Guía <i class="bi bi-arrow-right ms-1"></i>
-                </button>
+
+              <!-- Cuerpo de la Tarjeta -->
+              <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                <div>
+                  <h4 class="fw-bold mb-2 text-dark">{{ art.titulo }}</h4>
+                  <p class="text-muted small mb-3 lh-base">{{ art.resumen }}</p>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between pt-3 border-top mt-auto">
+                  <small class="text-muted">
+                    <i class="bi bi-person-fill text-secondary me-1"></i>{{ art.autor }}
+                  </small>
+                  <button class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-semibold shadow-sm" (click)="abrirDetalle(art)">
+                    Leer Guía & Infografía <i class="bi bi-arrow-right ms-1"></i>
+                  </button>
+                </div>
               </div>
+
             </div>
           </div>
         }
       </div>
 
+      <!-- SECCIÓN OFICIAL B: Recursos y Material de Consulta -->
+      <div class="mt-5 pt-4">
+        <div class="row text-center mb-4">
+          <div class="col-lg-8 mx-auto">
+            <span class="badge bg-success bg-opacity-10 text-success fw-bold text-uppercase px-3 py-2 rounded-pill small">
+              <i class="bi bi-journal-bookmark-fill me-1"></i> Recursos y Material de Consulta Oficial
+            </span>
+            <h3 class="fw-bold mt-2">Fuentes Académicas y Guías de Referencia</h3>
+            <p class="text-muted small">
+              Bibliografía institucional, guías descargables y conferencias recomendadas para profundizar en la comunicación asertiva.
+            </p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          @for (rec of recursosConsulta; track rec.titulo) {
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100 border-0 shadow-sm rounded-4 p-4 bg-white card-hover d-flex flex-column justify-content-between">
+                <div>
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="badge rounded-pill px-3 py-1 small fw-semibold" [ngClass]="rec.badgeClass">
+                      {{ rec.tipo }}
+                    </span>
+                    <i class="bi fs-4" [ngClass]="rec.icono"></i>
+                  </div>
+                  <h5 class="fw-bold text-dark mb-1">{{ rec.titulo }}</h5>
+                  <small class="text-primary fw-semibold d-block mb-2">{{ rec.fuente }}</small>
+                  <p class="text-muted small mb-3 lh-base">{{ rec.descripcion }}</p>
+                </div>
+
+                <div class="pt-2 border-top">
+                  <a
+                    [href]="rec.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-light btn-sm w-100 rounded-pill fw-semibold text-dark border d-flex align-items-center justify-content-center gap-2"
+                  >
+                    <span>Consultar Fuente</span>
+                    <i class="bi bi-box-arrow-up-right small"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
       <!-- Acciones de Navegación -->
-      <div class="text-center mt-5 pt-2">
+      <div class="text-center mt-5 pt-3">
         <a routerLink="/inicio" class="btn btn-outline-primary rounded-pill px-4 me-2">
           <i class="bi bi-house-door me-1"></i>Volver al Inicio
         </a>
@@ -85,11 +150,13 @@
     }
   </div>
 
-  <!-- Modal / Vista Detallada de Artículo -->
+  <!-- Modal / Vista Detallada de Artículo con Infografía y Material de Consulta -->
   @if (articuloSeleccionado()) {
-    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.65);" (click)="cerrarDetalle()">
-      <div class="modal-dialog modal-dialog-centered modal-lg" (click)="$event.stopPropagation()">
+    <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.7);" (click)="cerrarDetalle()">
+      <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" (click)="$event.stopPropagation()">
         <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+          
+          <!-- Encabezado Modal -->
           <div class="modal-header bg-primary text-white p-4">
             <div>
               <span class="badge bg-white text-primary rounded-pill mb-2 px-3 py-1 fw-bold">
@@ -99,15 +166,80 @@
             </div>
             <button type="button" class="btn-close btn-close-white" aria-label="Cerrar" (click)="cerrarDetalle()"></button>
           </div>
-          <div class="modal-body p-4 bg-white" style="max-height: 65vh; overflow-y: auto;">
-            <div class="d-flex align-items-center gap-3 text-muted small mb-4 pb-2 border-bottom">
-              <span><i class="bi bi-clock me-1"></i>Tiempo estimado: {{ articuloSeleccionado()?.tiempoLectura }} minutos</span>
-              <span><i class="bi bi-person-circle me-1"></i>Autoría: {{ articuloSeleccionado()?.autor }}</span>
+
+          <!-- Cuerpo Modal -->
+          <div class="modal-body p-4 bg-white">
+            
+            <!-- Portada de Cabecera en Modal -->
+            <div class="rounded-3 overflow-hidden mb-4 shadow-sm" style="max-height: 240px;">
+              <img
+                [src]="getMultimedia(articuloSeleccionado()!.categoria).imagenUrl"
+                [alt]="articuloSeleccionado()?.titulo"
+                class="w-100 h-100 object-fit-cover"
+              />
             </div>
-            <div class="lh-lg text-secondary" style="white-space: pre-line;">
+            <p class="text-muted small fst-italic text-center mb-4">
+              <i class="bi bi-image me-1"></i>{{ getMultimedia(articuloSeleccionado()!.categoria).pieDeFoto }}
+            </p>
+
+            <!-- Metadatos de Lectura -->
+            <div class="d-flex flex-wrap align-items-center gap-3 text-muted small mb-4 pb-3 border-bottom">
+              <span><i class="bi bi-clock me-1 text-primary"></i>Tiempo estimado: {{ articuloSeleccionado()?.tiempoLectura }} minutos</span>
+              <span><i class="bi bi-person-circle me-1 text-primary"></i>Autoría: {{ articuloSeleccionado()?.autor }}</span>
+              <span><i class="bi bi-database me-1 text-success"></i>Fuente: PostgreSQL (Neon.tech)</span>
+            </div>
+
+            <!-- Contenido del Artículo -->
+            <div class="lh-lg text-secondary mb-4" style="white-space: pre-line;">
               {{ articuloSeleccionado()?.contenido }}
             </div>
+
+            <!-- INFOGRAFÍA / RESUMEN CONCEPTUAL -->
+            <div class="bg-light p-4 rounded-4 border mb-4">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-diagram-3-fill text-primary fs-4"></i>
+                <h5 class="fw-bold mb-0 text-dark">
+                  {{ getMultimedia(articuloSeleccionado()!.categoria).infografiaClave.titulo }}
+                </h5>
+              </div>
+              <div class="row g-3">
+                @for (item of getMultimedia(articuloSeleccionado()!.categoria).infografiaClave.items; track item.titulo) {
+                  <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-xs p-3 bg-white rounded-3">
+                      <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi fs-5" [ngClass]="item.icono"></i>
+                        <span class="fw-bold small text-dark">{{ item.titulo }}</span>
+                      </div>
+                      <p class="text-muted small mb-0 lh-sm">{{ item.detalle }}</p>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- ENLACE DIRECTO A MATERIAL DE CONSULTA ASOCIADO -->
+            <div class="p-3 rounded-3 border border-primary bg-primary bg-opacity-10 d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div>
+                <small class="text-primary fw-bold text-uppercase d-block">Material de Consulta Recomendado</small>
+                <strong class="text-dark">{{ getMultimedia(articuloSeleccionado()!.categoria).recursoAsociado.nombre }}</strong>
+                <span class="badge bg-primary text-white ms-2 small">
+                  {{ getMultimedia(articuloSeleccionado()!.categoria).recursoAsociado.tipo }}
+                </span>
+              </div>
+              <a
+                [href]="getMultimedia(articuloSeleccionado()!.categoria).recursoAsociado.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primary btn-sm rounded-pill px-3 shadow-sm d-flex align-items-center gap-2"
+              >
+                <span>Leer Fuente Oficial</span>
+                <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+            </div>
+
           </div>
+
+          <!-- Pie del Modal -->
           <div class="modal-footer bg-light p-3">
             <button type="button" class="btn btn-secondary rounded-pill px-4" (click)="cerrarDetalle()">Cerrar</button>
             <a routerLink="/quiz" class="btn btn-warning fw-bold rounded-pill px-4 text-dark" (click)="cerrarDetalle()">
@@ -119,3 +251,4 @@
     </div>
   }
 </section>
+
